@@ -1,4 +1,7 @@
-@()
+@(books:List[Book])
 @main("All your Books!"){
     <h1>All your Books!</h1>
+    @for(book<-books){
+     <p>@book.title</p>   <p>@book.author</p>
+    }
 }
