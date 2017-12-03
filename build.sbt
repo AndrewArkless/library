@@ -10,7 +10,9 @@ scalaVersion := "2.11.11"
 libraryDependencies += filters
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % Test
 libraryDependencies += "org.mockito" % "mockito-all" % "1.8.4"
+resolvers += Resolver.bintrayRepo("hmrc", "releases")
 
+libraryDependencies += "uk.gov.hmrc" %% "http-verbs" % "6.3.0"
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
 

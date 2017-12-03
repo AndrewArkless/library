@@ -1,15 +1,19 @@
 package services
 
-import com.google.inject.ImplementedBy
-import models.DVD
+import com.google.inject.{ImplementedBy, Inject}
+import connectors.BackEndConnectors
+import models.{DVD, DVDS}
+
+import scala.concurrent.Future
 
 /**
   * Created by andrew on 29/11/17.
   */
-class RealDVDsService extends DVDsService{
-  override def getAllDVDs=List[DVD](DVD("The Thing","John Carpenter"),DVD("Alien","Ridley Scott"))}
+class RealDVDsService @Inject()(cn:BackEndConnectors) extends DVDsService{
+  override def getAllDVDs=cn.getDVDS
+}
 
 @ImplementedBy(classOf[RealDVDsService])
 trait DVDsService {
-  def getAllDVDs:List[DVD]
+  def getAllDVDs:Future[DVDS]
 }

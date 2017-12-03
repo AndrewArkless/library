@@ -1,14 +1,17 @@
 package services
 
-import com.google.inject.ImplementedBy
-import models.Book
+import com.google.inject.{ImplementedBy, Inject}
+import connectors.BackEndConnectors
+import models.{Book, Books}
 
-class RealBooksService extends BooksService{
-  def getAllBooks=List[Book](Book("It","Stephen King"),
-                             Book("The Cyberiad","Stanislaw Lem")
-  )
+import scala.concurrent.Future
+class RealBooksService @Inject()(cn:BackEndConnectors) extends BooksService{
+  def getAllBooks: Future[Books] = {
+    cn.getBooks
+  }
 }
+
 @ImplementedBy(classOf[RealBooksService])
 trait BooksService {
-  def getAllBooks: List[Book]
+  def getAllBooks: Future[Books]
 }
