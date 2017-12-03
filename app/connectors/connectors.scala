@@ -33,6 +33,7 @@ class BackEndConnectorImp extends BackEndConnectors {
     implicit val hc=HeaderCarrier()
     val response=http.GET[HttpResponse]("http://localhost:9001/get-all-dvds")(rds=HttpReads.readRaw,hc)
     response.flatMap{httpResponse=>
+      println(httpResponse.json)
       httpResponse.json.validate[DVDS].fold(
         invalid=>Future.failed(new JsonValidationException("invalid")),
         valid=>Future.successful(valid)

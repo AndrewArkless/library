@@ -17,7 +17,7 @@ object Books{
   implicit val formats:Format[Books]=Json.format[Books]
 }
 
-case class DVD(film:String,director:String)
+case class DVD(title:String,director:String)
 
 object DVD{
   implicit val formats:Format[DVD]=Json.format[DVD]
